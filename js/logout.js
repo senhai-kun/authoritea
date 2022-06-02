@@ -9,7 +9,7 @@ async function logout() {
     .then( res => {
         console.log(res) 
         localStorage.clear();
-        window.location.reload();
+        window.location = "index.html";
     })
     .catch( e => console.log(e) )
 
