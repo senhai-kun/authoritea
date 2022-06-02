@@ -10,7 +10,6 @@ async function logout() {
         console.log(res) 
         localStorage.clear();
         window.location.reload();
-
     })
     .catch( e => console.log(e) )
 
