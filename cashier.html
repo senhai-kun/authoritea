@@ -14,7 +14,7 @@
 
     <script type="text/javascript" >
         if( localStorage.getItem("role") !== "cashier" &&  localStorage.getItem("role") !== "admin" ) {
-            window.location = "home.html";
+            window.location = "index.html";
             alert("You need to login first!");
         }
 
@@ -29,14 +29,14 @@
             <div class="d-flex align-items-center justify-content-center justify-content-md-between w-100 flex-wrap">
 
                 <div class="d-flex align-items-center justify-content-center flex-wrap" >
-                    <a class="navbar-brand text-light logo fs-3" href="home.html">
+                    <a class="navbar-brand text-light logo fs-3" href="index.html">
                         THE BREW 
                         <span class="text-light logo"><span style="color: #de9931;" >AUTHORI</span>TEA</span>
                     </a>
                 </div>
 
                 <div class="d-flex gap-2 gap-sm-4 ">
-                    <a class="navbar-brand display-6 " style="color: #f2d4b1;" href="home.html" >Home</a>
+                    <a class="navbar-brand display-6 " style="color: #f2d4b1;" href="index.html" >Home</a>
                     <a class="navbar-brand display-6 text-light" href="cashier.html" >Cashier</a>
                     <a id="admin-link" class="navbar-brand display-6" style="color: #f2d4b1;" href="admin.html" >Admin</a>
                     <a class="navbar-brand text-danger " id="logout" onclick="logout()" href="signin.html" >Logout</a>
