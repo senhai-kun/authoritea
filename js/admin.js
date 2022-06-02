@@ -109,12 +109,11 @@ async function updateAccount(e) {
     }).then((res) => res.json)
     .then((res) => {
         console.log(res);
+        window.location.reload();
     })
     .catch((e) => {
         console.log(e);
     });
-
-    // window.location.reload();
 
 }
 
@@ -179,12 +178,12 @@ function removeAccount(username) {
         .then((res) => res.json)
         .then((res) => {
             console.log(res);
+            window.location.reload();
         })
         .catch((e) => {
             console.log(e);
         });
 
-    window.location.reload();
 }
 
 

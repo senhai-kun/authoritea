@@ -6,7 +6,11 @@ async function logout() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: localStorage.getItem("username") }), 
     }).then( res => res.json() )
-    .then( res => console.log(res) )
+    .then( res => {
+        console.log(res) 
+        window.location.reload();
+    
+    })
     .catch( e => console.log(e) )
 
     localStorage.clear();

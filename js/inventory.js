@@ -98,12 +98,12 @@ function removeProduct(name) {
         .then((res) => res.json)
         .then((res) => {
             console.log(res);
+            window.location.reload();
         })
         .catch((e) => {
             console.log(e);
         });
 
-    window.location.reload();
 }
 
 
@@ -203,12 +203,13 @@ async function updateProduct(e) {
     }).then((res) => res.json)
     .then((res) => {
         console.log(res);
+        window.location.reload();
+
     })
     .catch((e) => {
         console.log(e);
     });
 
-    window.location.reload();
 }
 
 editProductForm.addEventListener("submit", updateProduct)

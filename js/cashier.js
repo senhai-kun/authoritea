@@ -242,12 +242,15 @@ async function submitOrder() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     }).then( res => res.json() )
-    .then( res => console.log(res) )
+    .then( res => {
+        console.log(res)
+        setTimeout( () => {
+            window.location.reload(); // refresh the browser
+        }, 1000 )
+    } )
     .catch( e => console.log(e) )
 
-    setTimeout( () => {
-        window.location.reload(); // refresh the browser
-    }, 1000 )
+  
 }
 
 
