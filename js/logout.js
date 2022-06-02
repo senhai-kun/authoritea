@@ -9,8 +9,8 @@ async function logout() {
     .then( res => {
         console.log(res) 
         localStorage.clear();
-        window.location = "signin.html";
-    
+        window.location.reload();
+
     })
     .catch( e => console.log(e) )
 
