@@ -17,7 +17,7 @@ async function submit(e) {
 
     var data = { username: username.value, password: password.value }
 
-    await fetch("http://localhost:5000/account/signin", { method: "POST", body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } })
+    await fetch("https://authoritea-server.vercel.app/account/signin", { method: "POST", body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } })
         .then( res => {
             return res.json()
         } )

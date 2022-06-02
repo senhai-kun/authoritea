@@ -114,7 +114,7 @@ async function updateAccount(e) {
         console.log(e);
     });
 
-    window.location.reload();
+    // window.location.reload();
 
 }
 
