@@ -8,10 +8,10 @@ async function logout() {
     }).then( res => res.json() )
     .then( res => {
         console.log(res) 
+        localStorage.clear();
         window.location.reload();
     
     })
     .catch( e => console.log(e) )
 
-    localStorage.clear();
 }
