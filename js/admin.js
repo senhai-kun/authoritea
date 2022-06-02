@@ -5,7 +5,7 @@ let revenueWeekly = document.getElementById("revenue-weekly");
 
 let dateToday = new Date().toLocaleString('en-us', { year:"numeric", day: "numeric", month:"short"});
 
-fetch("http://localhost:5000/sales/get_revenue", {
+fetch("https://authoritea-server.vercel.app/sales/get_revenue", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ date: dateToday }),
@@ -22,7 +22,7 @@ fetch("http://localhost:5000/sales/get_revenue", {
 let userTable = document.getElementById("users");
 
 async function getUsers() {
-    await fetch("http://localhost:5000/account/get_users", {
+    await fetch("https://authoritea-server.vercel.app/account/get_users", {
     method: "GET",
     }).then((res) => res.json())
     .then((res) => {
@@ -102,7 +102,7 @@ async function updateAccount(e) {
     var newUsername = document.getElementById("edit-account-name").value;
     var user = document.getElementById("edit-account").getAttribute("name");
 
-    fetch("http://localhost:5000/account/edit_account", { 
+    fetch("https://authoritea-server.vercel.app/account/edit_account", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: user, username: newUsername }),
@@ -136,7 +136,7 @@ async function addAccount(e) {
         role: role.value,
     };
 
-    await fetch("http://localhost:5000/account/add_account", {
+    await fetch("https://authoritea-server.vercel.app/account/add_account", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -171,7 +171,7 @@ var removeBtn = document.getElementById("remove-account");
 function removeAccount(username) {
     console.log(username);
 
-    fetch("http://localhost:5000/account/remove_account", {
+    fetch("https://authoritea-server.vercel.app/account/remove_account", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: username }),

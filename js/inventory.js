@@ -1,7 +1,7 @@
 var inventory = document.getElementById("inventory-table")
 
 async function getInventory() {
-    await fetch("http://localhost:5000/product/get_inventory").then( res => res.json() )
+    await fetch("https://authoritea-server.vercel.app/product/get_inventory").then( res => res.json() )
     .then( res => {
         console.log(res);
         
@@ -62,7 +62,7 @@ async function addProduct(e) {
         bestSeller: bestSeller.checked
     }
 
-    await fetch("http://localhost:5000/product/add_product",
+    await fetch("https://authoritea-server.vercel.app/product/add_product",
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -90,7 +90,7 @@ addProductForm.addEventListener("submit", addProduct)
 
 
 function removeProduct(name) {
-    fetch("http://localhost:5000/product/remove_product", {
+    fetch("https://authoritea-server.vercel.app/product/remove_product", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: name }),
@@ -196,7 +196,7 @@ async function updateProduct(e) {
         bestSeller: bestSeller.checked
     }
 
-    fetch("http://localhost:5000/product/edit_product",{
+    fetch("https://authoritea-server.vercel.app/product/edit_product",{
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

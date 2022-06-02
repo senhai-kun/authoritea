@@ -1,7 +1,7 @@
 
 
 async function logout() {
-    await fetch("http://localhost:5000/account/logout", 
+    await fetch("https://authoritea-server.vercel.app/account/logout", 
     {  method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: localStorage.getItem("username") }), 

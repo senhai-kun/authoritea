@@ -1,7 +1,7 @@
 
 var milkteaList = document.getElementById("milktea-list");
 
-fetch("http://localhost:5000/product/get_milktea").then( res => res.json() )
+fetch("https://authoritea-server.vercel.app/product/get_milktea").then( res => res.json() )
 .then( res => {
     milkteaList.innerHTML = res.map( data => 
         `
@@ -43,7 +43,7 @@ fetch("http://localhost:5000/product/get_milktea").then( res => res.json() )
 
 var coffeeList = document.getElementById("coffee-list");
 
-fetch("http://localhost:5000/product/get_coffee").then( res => res.json() )
+fetch("https://authoritea-server.vercel.app/product/get_coffee").then( res => res.json() )
 .then( res => {
     coffeeList.innerHTML = res.map( data => 
         `
@@ -86,7 +86,7 @@ fetch("http://localhost:5000/product/get_coffee").then( res => res.json() )
 
 var snackList = document.getElementById("snack-list");
 
-fetch("http://localhost:5000/product/get_snack").then( res => res.json() )
+fetch("https://authoritea-server.vercel.app/product/get_snack").then( res => res.json() )
 .then( res => {
     snackList.innerHTML = res.map( data => 
         `
@@ -237,7 +237,7 @@ async function submitOrder() {
         orderDateTime: new Date().toLocaleString()
     }
 
-    await fetch("http://localhost:5000/order/submit_order", { 
+    await fetch("https://authoritea-server.vercel.app/order/submit_order", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
