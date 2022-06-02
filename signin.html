@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>Sign In</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript" > 
+        let role = localStorage.getItem("role");
+
+        if( role !== null ) {
+            window.location = `${role}.html`;
+        }
+    </script>
+
+</head>
+<body >
+    <nav class="head navbar pt-4 pb-4 mb-4">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center justify-content-md-between w-100 flex-wrap">
+
+                <div class="d-flex align-items-center justify-content-center flex-wrap" >
+                    <a class="navbar-brand text-light logo fs-3" href="home.html">
+                        THE BREW 
+                        <span class="text-light logo"><span style="color: #de9931;" >AUTHORI</span>TEA</span>
+                    </a>
+                </div>
+
+                <div class="d-flex gap-2 gap-sm-4 ">
+                    <a class="navbar-brand display-6 " style="color: #f2d4b1;" href="home.html" >Home</a>
+                    <a class="navbar-brand text-light display-6 "  href="signin.html" >Signin</a>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" >
+
+        </script>
+    </nav>
+
+    <div class="container d-flex justify-content-center align-items-center " style="height: 50vh;" >
+        <div class="w-100 w-md-50 lighten mt-5 " >
+            <div class="mb-5" >
+                <h1 class="text-primary ">Sign In</h1>
+                <p class="text-primary fw-light opacity-80" >Login with data provided by admin.</p>        
+            </div>
+
+            <form id="form" class="needs-validation" >
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="username" placeholder="Username" required>
+                    <label for="username">Username</label>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input id="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                    <label for="floatingPassword">Password</label>
+                </div>
+
+                <button id="signin" type="submit" class="btn btn-warning w-100">
+                    Sign In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="alert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="alertLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-custom">
+                    <h5 class="modal-title" id="alertLabel">
+                        Alert
+
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="alert-body" class="modal-body">
+                    <i class="bi bi-exclamation-circle-fill"></i>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button id="alert-button" type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/signin.js"></script>
+</body>
+</html>

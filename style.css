@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Josefin+Sans:wght@700&family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: 'Lexend', sans-serif;
+    background: url("asset/wood.jpg");
+    min-width: 360px;
+}
+
+p { 
+    padding: 0;
+    margin: 0;
+}
+
+.logo {
+    font-family: 'Josefin Sans', sans-serif;
+    /* font-size: 2em; */
+}
+
+.bubbles {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+}
+
+.head {
+    background: url("asset/header.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-attachment: fixed; */
+    background-size: cover;
+    backdrop-filter: blur(5px);
+}
+
+.title {
+    padding-top: 0.8em;
+}
+
+.lighten {
+    background-color: rgba(255, 255, 255, 0.3);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    /* margin-top: 5em; */
+    padding: 1.5em;
+}
+
+
+.img {
+    --mask: 
+    linear-gradient(#000 0 0) top/100% calc(100% - 3px) no-repeat,
+    conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/6.00px 3px repeat-x;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+}
+
+
+
+/* custom styles */
+
+.bg-custom {
+    background-color: #de9931 !important;
+}
+
+.btn-warning, .btn-warning:hover, .btn-warning:active, .btn-warning:visited, .btn-warning:focus {
+    background-color: #de9931 !important;
+    color: #fff;
+    border: none !important;
+}
+
+.text-primary {
+    color: #9c6006 !important;
+}
+
+.text-secondary {
+    color: #de9931 !important;
+}
+
+.font-family-Allura {
+    font-family: 'Allura', cursive;
+}
+
+.bg-light {
+    background-color: #f7f4f0 !important;
+}
+
+.rounded-20 {
+    border-radius: 20px !important;
+}
+
+@media (min-width: 768px) {
+    .w-md-25 {
+        width: 25% !important;
+    }
+    .w-md-50 {
+        width: 50% !important;
+    }
+    .w-md-60 {
+        width: 60% !important;
+    }
+    .w-md-40 {
+        width: 40% !important;
+    }
+    .w-md-75 {
+      width: 75% !important;
+    }
+    .h-md-75 {
+      height: 75% !important;
+    }
+    #menu th, #menu td {
+        padding: 1.2rem !important;
+    }
+
+}
+
+.border-dotted{
+    border-bottom: 4px dotted black;
+}

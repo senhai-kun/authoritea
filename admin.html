@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <title>Admin</title>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript" >
+        var role = localStorage.getItem("role");
+
+        if( role !== "admin"  ) {
+            localStorage.clear();
+            window.location = "signin.html";
+        }
+    </script>
+
+    <script type="text/javascript" src="js/logout.js"></script>
+
+</head>
+<body onload="startTime()">
+    <nav class="head navbar pt-4 pb-4 mb-4">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center justify-content-md-between w-100 flex-wrap">
+
+                <div class="d-flex align-items-center justify-content-center flex-wrap" >
+                    <a class="navbar-brand text-light logo fs-3" href="home.html">
+                        THE BREW 
+                        <span class="text-light logo"><span style="color: #de9931;" >AUTHORI</span>TEA</span>
+                    </a>
+                </div>
+
+                <div class="d-flex gap-2 gap-sm-4 ">
+                    <a class="navbar-brand display-6 " style="color: #f2d4b1;" href="home.html" >Home</a>
+                    <a class="navbar-brand display-6" style="color: #f2d4b1;" href="cashier.html" >Cashier</a>
+                    <a class="navbar-brand display-6 text-light" href="admin.html" >Admin</a>
+                    <a id="logout" class="navbar-brand text-danger " onclick="logout()"  href="signin.html" >Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pb-5" >
+        <div class="lighten" >
+            <h4 class="text-primary mb-3 ">Good Day, <span id="admin-username" ></span>!</h4>
+
+            <script>
+                let user = document.getElementById("admin-username");
+
+                user.setAttribute("class", "text-capitalize")
+                user.innerHTML = localStorage.getItem("username")
+
+            </script>
+
+
+            <div class="bg-custom p-4 p-md-5 mt-2 d-flex gap-5 flex-wrap flex-sm-nowrap rounded-20"  >
+                <div class="w-100 w-md-25" >
+                    <p class="text-light fw-light" >Today's Revenue</p>
+                    <p id="revenue-today" class="fs-3 text-light" >₱0.00</p>
+                    <p id="revenue-date-today" class="text-light fw-lighter"></p>
+                </div>
+
+                <div >
+                    <p class="text-light fw-light" >Weekly Revenue</p>
+                    <p id="revenue-weekly" class="fs-3 text-light" >₱0.00</p>
+                    <p class="text-light fw-lighter">Average income for the whole week.</p>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center gap-5 flex-wrap w-100 w-md-75">
+                    <div class=" text-center " >
+                        <i class="bi bi-person-circle text-primary h2" ></i>
+                        <h4 class="text-primary text-center " ><span id="admin-profile-username" ></span></h4>
+
+                        <script>
+                            let profile = document.getElementById("admin-profile-username");
+            
+                            profile.setAttribute("class", "text-capitalize")
+                            profile.innerHTML = localStorage.getItem("username")
+            
+                        </script>
+                    </div>
+        
+                    <div class="text-center " >
+                        <p class="text-dark fw-light " >Status: <span class="text-success">Online</span></p>
+        
+                        <p class="text-dark fw-light ">Time: <span id="date" ></span> </p>
+        
+                        <script>
+                            function startTime() {
+                                const today = new Date();
+                                document.getElementById('date').innerHTML = today.toLocaleString();
+                                setTimeout(startTime, 1000);
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mt-5 " >
+                <h4 class="text-primary">Accounts</h4>
+
+                <div class="text-end me-2" >
+                    <button class="btn btn-warning  " data-bs-toggle="modal" data-bs-target="#account-modal" >
+                        <i class="bi bi-plus"></i>
+                        Add New Account
+                    </button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table id="menu" class="table  table-hover table-borderless rounded-20 overflow-hidden mt-2" >
+                        <thead class="table-light ">
+                            <tr>
+                                <th >Username</th>
+                                <th >Role</th>
+                                <th class="text-center">Status</th>
+                                <th  class="text-center">Action</th>
+                            </tr> 
+                        </thead>
+                        <tbody id="users" class="table-light">
+                            <!-- fetched from database get_users-->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div> 
+
+            <div class="mt-5 " >
+                <h4 class="text-primary">Inventory</h4>
+
+                <div class="text-end me-2" >
+                    <button class="btn btn-warning  " data-bs-toggle="modal" data-bs-target="#inventory-modal" >
+                        <i class="bi bi-plus"></i>
+                        Add New Product
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="menu" class="table  table-hover w-100 rounded overflow-hidden mt-2">
+                        <thead class="table-warning ">
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Meduim</th>
+                                <th scope="col">Large</th>
+                                <th scope="col"></th>
+                            </tr> 
+                        </thead>
+                        <tbody id="inventory-table" class="table-light" >
+                            <!-- fetched from database inventory.js -->
+                        </tbody>
+                
+                    </table>  
+                </div> 
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Inventory Modal -->
+
+    <!-- Add Products -->
+    <div class="modal fade " id="inventory-modal" tabindex="-1" aria-labelledby="inventory-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inventory-modal-label">Add New Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="add-product-form" action="" method="post">
+                    <div class="modal-body">
+                        <div id="message" class="text-danger mb-3"></div>
+                        
+                        <h6 class="mt-2" >Details</h6>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Item Name</span>
+                            <input id="item-name" required type="text" class="form-control text-capitalize" placeholder="Product Name" aria-label="Item Name" aria-describedby="basic-addon1">
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon2">Description</span>
+                            <input id="item-description" required type="text" class="form-control text-capitalize" placeholder="Description" aria-label="Description" aria-describedby="basic-addon2">
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="best-seller">
+                            <label class="form-check-label" for="best-seller">
+                              Best Seller
+                            </label>
+                        </div>
+                          
+
+                        <h6 class="mt-4" >Price</h6>
+
+                        <div class="d-flex gap-2 flex-wrap flex-sm-nowrap" >
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon2">Medium</span>
+                                <input id="price-medium" type="number" step="0.01" class="form-control" placeholder="Medium Price" aria-label="Medium Price" aria-describedby="basic-addon2">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon2">Large</span>
+                                <input id="price-large" type="number" step="0.01" class="form-control" placeholder="Large Price" aria-label="Large Price" aria-describedby="basic-addon2">
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon2">Stock</span>
+                            <input id="item-stock" type="number" value="0" class="form-control" placeholder="Available Stocks" aria-label="Available Stocks" aria-describedby="basic-addon2">
+                        </div>
+
+                        <h6 class="mt-4" >Type</h6>
+    
+                        <select id="item-type" class="form-select" >
+                            <option value="milktea">Milktea</option>
+                            <option value="coffee">Coffee</option>
+                            <option value="snack">Snack</option>
+                        </select>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Products -->
+    <div class="modal fade" id="edit-inventory-modal" tabindex="-1" aria-labelledby="edit-inventory-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit-inventory-modal-label">Edit Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="edit-product-form" action="" method="post">
+                   <!-- editProductForm inventory.js -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accounts Modal -->
+
+    <!-- Add Account -->
+    <div class="modal fade" id="account-modal" tabindex="-1" aria-labelledby="account-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="account-modal-label">Add New Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="create-acc-form" action="" method="post">
+                <div class="modal-body">
+                    <div id="message" class="text-danger mb-3" ></div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle " ></i></span>
+                        <input id="username" required type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="bi bi-key-fill" style="transform: rotate(90deg);"></i>
+                        </span>
+
+                        <input id="password" required type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                    </div>
+
+                    <h6 class="mt-2" >Role</h6>
+
+                    <div class="d-flex gap-3">
+
+                        <select id="role" class="form-select" aria-label="Default select example" >
+                            <option value="cashier">Cashier</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </div>
+
+            </form>
+
+            
+        </div>
+    </div>
+
+    <!-- Edit Account -->
+    <div class="modal fade" id="edit-account-modal" tabindex="-1" aria-labelledby="edit-account-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit-account-modal-label">Edit Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="edit-account-form" action="" method="post">
+                   <!-- editAccountForm admin.js -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript"  src="js/admin.js"></script>
+    <script type="text/javascript"  src="js/inventory.js"></script>
+</body>
+</html>

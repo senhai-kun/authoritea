@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>Shop</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript" src="js/logout.js"></script>
+</head>
+<body >
+    <nav class="head navbar pt-4 pb-4 mb-4">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center justify-content-md-between w-100 flex-wrap">
+
+                <div class="d-flex align-items-center justify-content-center flex-wrap" >
+                    <a class="navbar-brand text-light logo fs-3" href="home.html">
+                        THE BREW 
+                        <span class="text-light logo"><span style="color: #de9931;" >AUTHORI</span>TEA</span>
+                    </a>
+                </div>
+
+                <div class="d-flex gap-0 gap-sm-4 justify-content-evenly text-capitalize ">
+                    <a class="navbar-brand me-0 text-light display-6 "  href="home.html" >Home</a>
+                    <a id="cashier-link" class="navbar-brand me-0 display-6" style="color: #f2d4b1;" href="cashier.html" >Cashier</a>
+                    <a id="admin-link" class="navbar-brand me-0 display-6" style="color: #f2d4b1;" href="admin.html" >Admin</a>
+                    <a id="signin" class="navbar-brand me-0 display-6" style="color: #f2d4b1;" href="signin.html" >Signin</a>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript"> 
+            let role = localStorage.getItem("role");
+            let cashier = document.getElementById("cashier-link");
+            let admin = document.getElementById("admin-link");
+            let signin = document.getElementById("signin");
+
+            if( role !== "admin"  ) admin.setAttribute("class", "d-none")
+            
+            if( role !== "cashier" ) cashier.setAttribute("class", "d-none")
+            
+            if ( role !== null ) { // change signin button to logout btn
+                signin.innerHTML = '<a class="navbar-brand text-danger " id="logout" onclick="logout()" href="signin.html" >Logout</a>'
+            }   
+        </script>
+    </nav>
+    
+    <div class="container">
+        <div id="carouselExampleControls" class="carousel slide rounded " data-bs-ride="carousel" style="height: 120px; overflow: hidden;">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img 
+                        src="asset/double.jpg"
+                        width="100%"
+                        height="100%"
+                    />
+                </div>
+                <div class="carousel-item ">
+                    <img 
+                        src="asset/tea.png"
+                        width="100%"
+                        height="100%"
+                    />
+                </div>
+                </div>
+           
+          </div>
+    </div>
+
+    <div class="container mt-1 mt-md-5 mb-5 d-flex gap-3" >
+        <div class="d-none d-md-block w-25" >
+            <div class="shadow-lg p-2 bg-light mb-3 rounded " >
+                <img class="img rounded" src="asset/taste.jpg" alt="taste" width="100%" />
+
+                <h5 class="text-center mt-3 " style="color: #9c6006; " >Capture Your Taste</h5>
+            </div>
+
+            <div class="shadow-lg p-2 bg-light mb-3 rounded" >
+                <img class="img" src="asset/butter.jpg" alt="butter" width="100%" />
+
+                <h5 class="text-center mt-3 " style="color: #9c6006; " >Try Our New Flavor</h5>
+            </div>
+        </div>
+
+        <div class="w-100 w-md-75 menu shadow-lg p-5 bg-light rounded" >
+            <div class="text-center" >
+                <img width="120" src="asset/logo.png" height="120" />
+            </div>
+            <h1 class="text-primary fw-light fst-italic mb-5 text-center"  >Authoritea's Menu</h1>
+
+
+            <h2 class="text-primary fw-light" >Best Sellers</h2>
+
+            <div class="border-dotted mt-2 mb-4 " ></div>
+            
+            <div id="best-seller-list" >
+                <div  class="d-flex justify-content-between mb-3" >
+                    <div class="">
+                        <h5 class="m-0 p-0" >Winter Classic Milktea</h5>
+                        <p class="fw-light">Taste in Japan</p>
+                    </div>
+    
+                    <div class="d-flex gap-3" >
+                        <p class="text-primary text-nowrap" >M-85</p>
+                        <p class="text-primary text-nowrap" >L-95</p>
+                    </div>
+                </div>
+                
+            </div>
+            
+
+            <h2 class="text-primary fw-light mt-5" >Milktea</h2>
+
+            <div class="border-dotted mt-2 mb-4 " ></div>
+            
+            <div id="milktea-list"></div>
+
+            <h2 class="text-primary fw-light mt-5" >Coffee</h2>
+
+            <div class="border-dotted mt-2 mb-4 " ></div>
+            
+            <div id="coffee-list"></div>
+
+            <h2 class="text-primary fw-light mt-5" >Snack</h2>
+
+            <div class="border-dotted mt-2 mb-4 " ></div>
+            
+            <div id="snack-list"></div>
+           
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/home.js"></script>
+   
+</body>
+</html>
