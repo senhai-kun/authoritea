@@ -101,6 +101,13 @@ function editAccount(username) {
                     </span>
                     <input id="edit-account-password" required type="password" class="form-control" placeholder="New Password" aria-label="newPassword" aria-describedby="newPassword">
                 </div>
+
+                <div class="form-check mb-4 " >
+                    <input class="form-check-input" onclick="showEditAccPassword()" type="checkbox" id="show-edit-acc-password">
+                    <label class="form-check-label" for="show-edit-acc-password">
+                        Show Password
+                    </label>
+                </div>
     
             </div>
             <div class="modal-footer">
@@ -109,6 +116,26 @@ function editAccount(username) {
             </div>
         </div>
     `
+}
+
+function showEditAccPassword() {
+    var passwordInput = document.getElementById("edit-account-password");
+
+    if( passwordInput.type === "password" ) {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+}
+
+function showAddAccPassword() {
+    var passwordInput = document.getElementById("password");
+
+    if( passwordInput.type === "password" ) {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
 }
 
 async function updateAccount(e) {

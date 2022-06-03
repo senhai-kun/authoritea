@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
     <title>Sign In</title>
     <link rel="stylesheet" href="style.css">
@@ -55,14 +56,22 @@
                     <label for="username">Username</label>
                 </div>
 
-                <div class="form-floating mb-4">
-                    <input id="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <div class="form-floating mb-2 position-relative">
+                    <input id="password" type="password" class="form-control " id="floatingPassword" placeholder="Password" required>
                     <label for="floatingPassword">Password</label>
                 </div>
 
+                <div class="form-check mb-4 " >
+                    <input class="form-check-input" onclick="showPassword()" type="checkbox" id="show-password">
+                    <label class="form-check-label" for="show-password">
+                      Show Password
+                    </label>
+                </div>
+                
                 <button id="signin" type="submit" class="btn btn-warning w-100">
                     Sign In
                 </button>
+
             </form>
         </div>
     </div>

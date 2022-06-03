@@ -1,3 +1,14 @@
+
+function showPassword() {
+    var passwordInput = document.getElementById("password");
+
+    if( passwordInput.type === "password" ) {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+}
+
 var form = document.getElementById('form')
 var username = document.getElementById('username');
 var password = document.getElementById('password');
