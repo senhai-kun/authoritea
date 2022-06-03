@@ -47,6 +47,7 @@ var type = document.getElementById("item-type");
 var medium = document.getElementById("price-medium");
 var large = document.getElementById("price-large");
 var bestSeller = document.getElementById("best-seller");
+var addProductErrorMsg = document.getElementById("addproduct-error-message");
 
 var addProductForm = document.getElementById("add-product-form");
 
@@ -78,11 +79,11 @@ async function addProduct(e) {
             window.location.reload();
         }
 
-        message.innerText = res.message;
+        addProductErrorMsg.innerText = res.message;
         console.log(res);
     })
     .catch((e) => {
-        message.innerText = e.response.error;
+        addProductErrorMsg.innerText = e.response.error;
         console.log(e);
     });
 }

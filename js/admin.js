@@ -80,12 +80,18 @@ function editAccount(username) {
                 <h6 class="mt-2" >User Account</h6>
 
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">
+                    <span class="input-group-text" id="newUsername">
                         <i class="bi bi-person-circle"></i>
                     </span>
-                    <input id="edit-account-name" required type="text" value="${username}" class="form-control text-capitalize" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    <input id="edit-account-name" required type="text" value="${username}" class="form-control text-capitalize" placeholder="Username" aria-label="Username" aria-describedby="newUsername">
                 </div>
-                
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="newPassword">
+                        <i class="bi bi-key-fill" style="transform: rotate(90deg);" ></i>
+                    </span>
+                    <input id="edit-account-password" required type="password" class="form-control" placeholder="New Password" aria-label="newPassword" aria-describedby="newPassword">
+                </div>
     
             </div>
             <div class="modal-footer">
@@ -100,12 +106,13 @@ async function updateAccount(e) {
     e.preventDefault();
 
     var newUsername = document.getElementById("edit-account-name").value;
+    var newPassword = document.getElementById("edit-account-password").value;
     var user = document.getElementById("edit-account").getAttribute("name");
 
     fetch("https://authoritea-server.vercel.app/account/edit_account", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: user, username: newUsername }),
+        body: JSON.stringify({ user: user, username: newUsername, password: newPassword }),
     }).then((res) => res.json)
     .then((res) => {
         console.log(res);
@@ -124,7 +131,7 @@ var form = document.getElementById("create-acc-form");
 var username = document.getElementById("username");
 var password = document.getElementById("password");
 var role = document.getElementById("role");
-var message = document.getElementById("message");
+var accountErrorMsg = document.getElementById("account-error-message");
 
 async function addAccount(e) {
     e.preventDefault();
@@ -150,10 +157,11 @@ async function addAccount(e) {
                 window.location.reload();
             }
 
-            message.innerText = res.message;
+            accountErrorMsg.innerText = res.message;
             console.log(res);
         })
         .catch((e) => {
+            accountErrorMsg.innerText = e;
             console.log(e);
         });
 
