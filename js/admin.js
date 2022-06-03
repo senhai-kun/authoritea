@@ -44,7 +44,7 @@ async function getUsers() {
                 </td>
                 <td  >
                     <div class="text-center d-flex gap-2 justify-content-center" >
-                        <button type="button" onclick="editAccount('${data.username}')" class="btn btn-primary btn-sm d-flex flex-nowrap h-100 gap-2" data-bs-toggle="modal" data-bs-target="#edit-account-modal">
+                        <button type="button" onclick="editAccount('${data.username}')" class="btn btn-primary btn-sm d-flex flex-nowrap h-100 gap-2" >
                             <i class="bi bi-pen-fill"></i>
                             Edit
                         </button>
@@ -69,8 +69,17 @@ getUsers();
 
 // edit account 
 var editAccountForm = document.getElementById("edit-account-form");
+var editAccountModal = document.getElementById("edit-account-modal");
+var adminAlert = document.getElementById("admin-alert");
+var adminAlertMsg = document.getElementById("admin-alert-message");
+
+let adminAlertModal = new bootstrap.Modal(adminAlert);
+var adminEditModal = new bootstrap.Modal(editAccountModal);
 
 function editAccount(username) {
+
+    adminEditModal.show();
+
     editAccountForm.innerHTML = `
         <div class="modal-body">
                 <div id="edit-account" name="${username}" class="text-primary mb-4 h5 text-center">
@@ -109,14 +118,23 @@ async function updateAccount(e) {
     var newPassword = document.getElementById("edit-account-password").value;
     var user = document.getElementById("edit-account").getAttribute("name");
 
-    fetch("https://authoritea-server.vercel.app/account/edit_account", { 
+    await fetch("https://authoritea-server.vercel.app/account/edit_account", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: user, username: newUsername, password: newPassword }),
-    }).then((res) => res.json)
+    }).then((res) => res.json())
     .then((res) => {
-        console.log(res);
-        window.location.reload();
+        console.log(res.success);
+        
+
+        if( res.success ) {
+            adminEditModal.hide();
+
+            adminAlertMsg.innerText = res.message;
+            adminAlertModal.show();
+        } 
+        
+    
     })
     .catch((e) => {
         console.log(e);
@@ -154,11 +172,12 @@ async function addAccount(e) {
                 var modal = bootstrap.Modal.getInstance(myModalEl);
                 modal.hide();
 
-                window.location.reload();
+                adminAlertMsg.innerText = res.message;
+                adminAlertModal.show();
+            } else {
+                accountErrorMsg.innerText = res.message;
             }
 
-            accountErrorMsg.innerText = res.message;
-            console.log(res);
         })
         .catch((e) => {
             accountErrorMsg.innerText = e;
@@ -192,6 +211,11 @@ function removeAccount(username) {
             console.log(e);
         });
 
+}
+
+
+function reload() {
+    window.location.reload();
 }
 
 
