@@ -2,6 +2,7 @@ let revenueToday = document.getElementById("revenue-today");
 let revenueDateToday = document.getElementById("revenue-date-today");
 
 let revenueWeekly = document.getElementById("revenue-weekly");
+let revenueDateWeekly = document.getElementById("revenue-date-weekly");
 
 let dateToday = new Date().toLocaleString('en-us', { year:"numeric", day: "numeric", month:"short"});
 
@@ -14,7 +15,8 @@ fetch("https://authoritea-server.vercel.app/sales/get_revenue", {
     revenueToday.innerHTML = res.today.todaysRevenue;
     revenueDateToday.innerHTML = "Total income for today - "+res.today.date;
 
-    revenueWeekly.innerHTML = res.weekly;
+    revenueWeekly.innerHTML = res.week.weekly;
+    revenueDateWeekly.innerHTML = res.week.range;
 } )
 .catch( e => console.log(e) )
 
