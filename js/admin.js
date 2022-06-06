@@ -49,10 +49,10 @@ async function getUsers() {
                             Edit
                         </button>
 
-                        <button id="remove-account" onclick="removeAccount('${data.username}')" class="btn btn-outline-danger btn-sm d-flex flex-nowrap h-100 gap-2">
+                        ${data.username === "admin" ? "" : `<button id="remove-account" onclick="removeAccount('${data.username}')" class="btn btn-outline-danger btn-sm d-flex flex-nowrap h-100 gap-2">
                             <span><i class="bi bi-person-x-fill"></i></span>
                             Remove
-                        </button>
+                        </button>`}
                     </div>
                 </td>
             </tr>
