@@ -7,7 +7,26 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <!-- Popperjs -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
+      rel="stylesheet"
+    />
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/solid.min.js"
+    integrity="sha512-C92U8X5fKxCN7C6A/AttDsqXQiB7gxwvg/9JCxcqR6KV+F0nvMBwL4wuQc+PwCfQGfazIe7Cm5g0VaHaoZ/BOQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
 
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/fontawesome.min.js"
+    integrity="sha512-5qbIAL4qJ/FSsWfIq5Pd0qbqoZpk5NcUVeAAREV2Li4EKzyJDEGlADHhHOSSCw0tHP7z3Q4hNHJXa81P92borQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
     <title>Admin</title>
     
     <link rel="stylesheet" href="style.css">
@@ -136,18 +155,70 @@
             <div class="mt-5 " >
                 <h4 class="text-primary">Inventory</h4>
 
-                <div class="text-end me-2" >
-                    <button class="btn btn-warning  " data-bs-toggle="modal" data-bs-target="#inventory-modal" >
-                        <i class="bi bi-plus"></i>
-                        Add New Product
-                    </button>
+                <div class="ms-2 mt-3"> 
+                    <h5 class="text-primary">Main Ingredients</h5>
+
+                    <div class="d-flex gap-3 flex-wrap" >
+                        <div class="p-3 rounded-20 bg-light" style="width: 200px;" >
+                            <h5 class="text-primary fw-bold" >Tea</h5>
+                            <div class="mb-2" >
+                                <p>Stock:    <span id="main-ingredient-tea" class="fw-bold" ></span>g</p>
+                                <p id="main-ingredient-expire-tea"  style="height: 24px;" ></p>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="updateMainIngredients('tea')">Update</button>
+                        </div>
+                        <div class="p-3 rounded-20 bg-light" style="width: 200px;" >
+                            <h5 class="text-primary fw-bold" >Sugar</h5>
+                            <div class="mb-2" >
+                                <p>Stock:    <span id="main-ingredient-sugar" class="fw-bold" ></span>g</p>
+                                <p id="main-ingredient-expire-sugar"  style="height: 24px;" ></p>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="updateMainIngredients('sugar')">Update</button>
+                        </div>
+
+                        <div class="p-3 rounded-20 bg-light" style="width: 200px;" >
+                            <h5 class="text-primary fw-bold" >Milk</h5>
+                            <div class="mb-2" >
+                                <p>Stock:    <span id="main-ingredient-milk" class="fw-bold" ></span>g</p>
+                                <p id="main-ingredient-expire-milk" style="height: 24px;"></p>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="updateMainIngredients('milk')" >Update</button>
+                        </div>
+
+                        <div class="p-3 rounded-20 bg-light" style="width: 200px;" >
+                            <h5 class="text-primary fw-bold" >Pearl</h5>
+                            <div class="mb-2" >
+                                <p>Stock:    <span id="main-ingredient-pearl" class="fw-bold" ></span>g</p>
+                                <p id="main-ingredient-expire-pearl" style="height: 24px;"></p>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="updateMainIngredients('pearl')">Update</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="table-responsive">
+                <div class="me-2 mt-3 mb-3 d-flex justify-content-between flex-wrap gap-2" >
+                    <div class="input-group w-100 w-md-25">
+                        <input type="text" id="search" class="form-control" placeholder="Search ex. Okinawa" aria-label="Search ex. Okinawa" aria-describedby="search-input">
+                    </div>
+
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button class="btn btn-warning " onclick="addProductModal('milktea')" data-bs-toggle="modal" data-bs-target="#inventory-add-milktea" >
+                            <i class="bi bi-plus"></i>
+                            Add New Milktea
+                        </button>
+                        <button class="btn btn-warning " onclick="addProductModal('snack')" data-bs-toggle="modal" data-bs-target="#inventory-add-milktea" >
+                            <i class="bi bi-plus"></i>
+                            Add New Snack
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive h-50">
                     <table id="menu" class="table  table-hover w-100 rounded overflow-hidden mt-2">
                         <thead class="table-warning ">
                             <tr>
                                 <th scope="col">Item</th>
+                                <th scope="col">Ingredient</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Medium</th>
                                 <th scope="col">Large</th>
@@ -162,17 +233,151 @@
                 </div> 
             </div>
 
+                        
+            <div class="mt-5 " >
+                <h4 class="text-primary">Sales Record Today</h4>
+
+                <div id="sales" class="d-flex gap-4 flex-wrap" >
+                    <h5 class="p-5 text-center" >No Record For Today</h5>
+                </div>
+
+            </div> 
+
         </div>
     </div>
 
     <!-- Inventory Modal -->
 
-    <!-- Add Products -->
-    <div class="modal fade " id="inventory-modal" tabindex="-1" aria-labelledby="inventory-modal-label" aria-hidden="true">
+    <!-- Add New Milktea -->
+    <div class="modal fade "  id="inventory-add-milktea" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="inventory-modal-label">Add New Product</h5>
+                    <h5 class="modal-title" id="inventory-add-milktea-label">Add New <span id="modal-type" class="text-capitalize" ></span></h5>
+                    <button type="button" class="btn-close" onclick="resetForm()" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="add-product-form" method="post">
+                    <div class="modal-body">
+                        <div id="addmilktea-error-message" class="text-danger mb-3 text-center fw-bold"></div>
+                        
+                        <h6 class="mt-2" >Details</h6>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Item Name</span>
+                            <input id="item-name" required type="text" class="form-control text-capitalize" placeholder="Product Name" aria-label="Item Name" aria-describedby="basic-addon1">
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon2">Description</span>
+                            <input id="item-description" required type="text" class="form-control text-capitalize" placeholder="Description" aria-label="Description" aria-describedby="basic-addon2">
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="best-seller">
+                            <label class="form-check-label" for="best-seller">
+                              Best Seller
+                            </label>
+                        </div>
+                          
+                        <div id="forMilktea" >
+                            <h6 class="mt-4" >Ingredients</h6>
+
+                            <div class="ms-2 " >
+                                <div class="mb-4" >
+                                    <h6 class="mb-2" >Flavoring</h6>
+
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon2">Powder Name</span>
+                                        <input id="item-powder-name" required type="text" class="form-control text-capitalize" placeholder="Powder Flavor Name" aria-label="Powder Flavor Name" aria-describedby="basic-addon2">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon2">Powder Qty</span>
+                                        <input id="item-powder-qty" required type="text" class="form-control text-capitalize" placeholder="Powder qty (grams)" aria-label="Powder qty (grams)" aria-describedby="basic-addon2">
+                                    </div>
+
+                                    <h6 class="mt-4" >Expiry Date</h6>
+
+                                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                                        <input id='item-expire' type='text' class='form-control' placeholder="Click the icon to enter date" data-td-target='#datetimepicker1' />
+                                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
+                                            <i class="bi bi-calendar-fill"></i>
+                                        </span>
+                                    </div>
+        
+                                </div>
+
+                                <div class="mb-4">
+                                    <h6 class="mb-2" >Serving (grams per serving)</h6>
+
+                                    <div class="d-flex gap-0 gap-sm-2 flex-wrap flex-sm-nowrap">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon2">Sugar</span>
+                                            <input id="item-sugar-serving" required type="number" class="form-control" placeholder="Per Serving" aria-label="Per Serving" min="0" oninput="validity.valid||(value='');" >
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon2">Milk</span>
+                                            <input id="item-milk-serving" required type="number" class="form-control" placeholder="Per Serving" aria-label="Per Serving" min="0" oninput="validity.valid||(value='');" >
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex gap-0 gap-sm-2 flex-wrap flex-sm-nowrap">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon2">Tea</span>
+                                            <input id="item-tea-serving" required type="number" class="form-control" placeholder="Per Serving" aria-label="Per Serving" min="0" oninput="validity.valid||(value='');" >
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon2">Pearl</span>
+                                            <input id="item-pearl-serving" required type="number" class="form-control" placeholder="Per Serving" aria-label="Per Serving" min="0" oninput="validity.valid||(value='');" >
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-0 gap-sm-2 flex-wrap flex-sm-nowrap">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon2">Powder</span>
+                                            <input id="item-powder-serving" required type="number" class="form-control" placeholder="Per Serving" aria-label="Per Serving" min="0" oninput="validity.valid||(value='');" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4" >Price</h6>
+
+                        <div class="d-flex gap-2 flex-wrap flex-sm-nowrap" >
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon2">Medium</span>
+                                <input id="price-medium" type="number" step="0.01" class="form-control" placeholder="Medium Price" aria-label="Medium Price" aria-describedby="basic-addon2">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon2">Large</span>
+                                <input id="price-large" type="number" step="0.01" class="form-control" placeholder="Large Price" aria-label="Large Price" aria-describedby="basic-addon2">
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon2">Stock</span>
+
+                            <input id="item-stock" type="number" value="0" class="form-control" placeholder="Available Stocks" aria-label="Available Stocks" aria-describedby="basic-addon2">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetForm()">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Snack -->
+    <div class="modal fade "  id="inventory-add-snack" tabindex="-1" aria-labelledby="inventory-add-snack-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inventory-add-snack-label">Add New Snack</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="add-product-form" action="" method="post">
@@ -197,7 +402,6 @@
                               Best Seller
                             </label>
                         </div>
-                          
 
                         <h6 class="mt-4" >Price</h6>
 
@@ -217,14 +421,6 @@
                             <input id="item-stock" type="number" value="0" class="form-control" placeholder="Available Stocks" aria-label="Available Stocks" aria-describedby="basic-addon2">
                         </div>
 
-                        <h6 class="mt-4" >Type</h6>
-    
-                        <select id="item-type" class="form-select" >
-                            <option value="milktea">Milktea</option>
-                            <option value="coffee">Coffee</option>
-                            <option value="snack">Snack</option>
-                        </select>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -236,6 +432,44 @@
             </div>
         </div>
     </div>
+
+    <!-- Update Main Ingredients -->
+    <div class="modal fade"  id="main-ingredients-modal" tabindex="-1" aria-labelledby="main-ingredients-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="main-ingredients-modal-label">Update Main Ingredients</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="main-ingredients-form" action="" method="post">
+                    <div class="modal-body" >
+                        <h5 class="fw-light">Ingredient: <span id="main-ingredient-name" class="fw-bold text-primary text-capitalize" >Tea</span> </h5>
+                        <h5 class="mb-4 fw-light" >Remaining Stocks: <span id="main-ingredient-qty" class="fw-bold text-primary" >1000</span> g</h5>
+
+                        <div class="input-group mb-3 mt-3">
+                            <span class="input-group-text">Update Stock</span>
+                            <input id="main-ingredient-update-stock" required type="number" class="form-control" placeholder="Stock Qty(grams)" aria-label="Stock Qty(grams)" min="0" oninput="validity.valid||(value='');">
+                        </div>
+
+                        <h6 class="mt-4" >Expiry Date</h6>
+
+                        <div class='input-group' id='datetimepicker2' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                            <input id='main-ingredient-update-expire' type='text' class='form-control' placeholder="Enter Expiry Date" data-td-target='#datetimepicker2' />
+                            <span class='input-group-text' data-td-target='#datetimepicker2' data-td-toggle='datetimepicker' >
+                                <i class="bi bi-calendar-fill"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
 
     <!-- Edit Products -->
     <div class="modal fade" id="edit-inventory-modal" tabindex="-1" aria-labelledby="edit-inventory-modal-label" aria-hidden="true">
@@ -340,6 +574,67 @@
                 </div>
                 <div class="modal-footer">
                     <button id="alert-button" onclick="reload()" type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sales Receipt -->
+    <div class="modal fade"  id="sales-receipt" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="salesReceiptLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title " id="salesReceiptLabel">
+                        Sales Details
+                    </h5>
+                </div>
+                <div id="sales-receipt-body " class="modal-body ms-3 me-3">
+                    <div id="sales-receipt-header" class="mt-2 mb-2 ">
+                       
+                    </div>
+                    
+                    <div class="border-dotted mt-4 mb-2  " ></div>
+
+                    <h6 class="fw-bold mt-3">Ingredients Used</h6>
+
+                    <div class="ms-2" id="sales-ingredients" >
+                        <!-- ing used modal -->
+                    </div>
+
+                    <div class="border-dotted mt-4 mb-2  " ></div>
+
+                    <h6 class="fw-bold mt-3">Order Receipt</h6>
+
+                    <table class="table table-borderless" >
+                        <thead>
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col" class="text-end">Qty</th>
+                                <th scope="col" class="text-end">Subtotal</th>
+                            </tr> 
+                        </thead>
+                        <tbody id="sales-receipt-list" >
+                            <!-- order receipt -->
+                        </tbody>
+                    </table>
+
+                    <div class="mt-5 p-3" >
+                        <div class="d-flex justify-content-between flex-wrap mb-2 " >
+                                <p class="fw-light" >Items</p>
+                                <p id="receipt-total-items" class="fw-light" >0</p>
+                        </div>
+
+                        <div class="dropdown-divider" ></div>
+                    
+                        <div class="d-flex justify-content-between flex-wrap mb-2 " >
+                            <p class="h5 fw-bold" >Total</p>
+                            <p id="receipt-total-cost" class="h5 fw-bold" >₱0.00</p>
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="alert-button" type="button" class="btn btn-secondary" onclick="closeSales()">Close</button>
                 </div>
             </div>
         </div>

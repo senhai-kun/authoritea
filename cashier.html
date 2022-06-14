@@ -90,14 +90,16 @@
         </div>
 
         <div class="lighten" >
-            <ul class="nav nav-pills  mb-3 p-2" id="pills-tab" role="tablist">
+            <!-- <ul class="nav nav-pills  mb-3 p-2  justify-content-center " id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-cashier-tab" data-bs-toggle="pill" data-bs-target="#pills-cashier" type="button" role="tab" aria-controls="pills-cashier" aria-selected="true">Cashier</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-inventory-tab" data-bs-toggle="pill" data-bs-target="#pills-inventory" type="button" role="tab" aria-controls="pills-inventory" aria-selected="false">Inventory</button>
+                    <button class="nav-link position-relative" id="pills-notif-tab" data-bs-toggle="pill" data-bs-target="#pills-notif" type="button" role="tab" aria-controls="pills-notif" aria-selected="false">
+                        Reminders
+                    </button>
                 </li>
-            </ul>
+            </ul> -->
 
             <div class="tab-content" id="pills-tabContent">
                 <div class=" tab-pane fade show active " id="pills-cashier" role="tabpanel" aria-labelledby="pills-cashier-tab" tabindex="0"  >
@@ -110,12 +112,8 @@
                                     <button class="nav-link active " id="pills-milktea-tab" data-bs-toggle="pill" data-bs-target="#pills-milktea" type="button" role="tab" aria-controls="pills-milktea" aria-selected="true">Milktea</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-coffee-tab" data-bs-toggle="pill" data-bs-target="#pills-coffee" type="button" role="tab" aria-controls="pills-coffee" aria-selected="false">Coffee</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-snack-tab" data-bs-toggle="pill" data-bs-target="#pills-snack" type="button" role="tab" aria-controls="pills-snack" aria-selected="false">Snack</button>
                                 </li>
-                    
                             </ul>
 
                             <div class="tab-content table-responsive " id="pills-tabContent">
@@ -137,24 +135,6 @@
                                     </table>   
                                 </div>
 
-                                <div class="tab-pane fade p-2" id="pills-coffee" role="tabpanel" aria-labelledby="pills-coffee-tab" tabindex="2"> 
-                                    <table id="menu" class="table table-hover w-100 rounded overflow-hidden ">
-                                        <thead class="table-dark ">
-                                            <tr>
-                                                <th scope="col">Item</th>
-                                                <th scope="col">Stock</th>
-                                                <th scope="col">Medium</th>
-                                                <th scope="col">Large</th>
-                                                <th scope="col"></th>
-                                            </tr> 
-                                        </thead>
-                                        <tbody id="coffee-list" class="table-light" >
-                                            <!-- fetch from get_coffee-->
-                                        </tbody>
-                        
-                                    </table>  
-                                </div>
-
                                 <div class="tab-pane fade p-2" id="pills-snack" role="tabpanel" aria-labelledby="pills-snack-tab" tabindex="3"> 
                                     <table id="menu" class="table table-hover w-100 rounded overflow-hidden ">
                                         <thead class="table-dark ">
@@ -173,9 +153,6 @@
                                     </table>  
                                 </div>
                             </div>
-                        
-                            
-                
                         </div>
 
                         <div class="bg-light w-100 h-100 w-md-40 rounded p-3" >   
@@ -190,10 +167,14 @@
                                 <tbody id="order-list" >
                                     <!-- order - cashier.js -->
                                 </tbody>
+
+                                <tbody id="promo" >
+                                    <!-- add promo if available -->
+                                </tbody>
                             </table>
 
                             <div class="dropdown-divider" ></div>
-
+                            
                             <div class="mt-5 p-3" >
                                 <div class="d-flex justify-content-between flex-wrap mb-2 " >
                                         <p class="fw-light" >Items</p>
@@ -221,34 +202,10 @@
                     
                 </div>
 
-                <div class="w-100 bg-light rounded tab-pane fade p-2" id="pills-inventory" role="tabpanel" aria-labelledby="pills-inventory-tab" tabindex="4"  >
+                <div class="w-100 bg-light rounded tab-pane fade p-2" id="pills-notif" role="tabpanel" aria-labelledby="pills-notif-tab" tabindex="4"  >
                     <div class=" p-3" >
-                        <h4 class="text-primary mb-0">Inventory</h4>
-        
-                        <div class="text-end me-2" >
-                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#inventory-modal" >
-                                <i class="bi bi-plus"></i>
-                                Add New Product
-                            </button>
-                        </div>
-                        
-                        <div class="table-responsive">
-                            <table id="menu" class="table  table-hover w-100 rounded overflow-hidden mt-2">
-                                <thead class="table-warning ">
-                                    <tr>
-                                        <th scope="col">Item</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Medium</th>
-                                        <th scope="col">Large</th>
-                                        <th scope="col"></th>
-                                    </tr> 
-                                </thead>
-                                <tbody id="inventory-table" class="table-light" >
-                                    <!-- fetched from database -->
-                                </tbody>
-                        
-                            </table>  
-                        </div> 
+                        <h4 class="text-primary mb-0">Reminders</h4>
+                        <p>List of products that is low on ingredients or expiring</p>
                     </div>
                 </div>
             </div>
@@ -261,27 +218,48 @@
     <!-- Order Modal -->
 
     <!-- Confirm Order Modal -->
-    <div class="modal fade "  id="confirm-order-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="alertLabel" aria-hidden="true">
+    <div class="modal fade" id="confirm-order-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="alertLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="d-flex gap-2 " >
-                        <h5 class="fw-bold modal-title">
-                            Total Order: 
-                        </h5>
+                    <h5 class="modal-title">
+                        Payment
+                    </h5>
 
-                        <h5 id="total-order-modal" class="fw-bold modal-title" ></h5>
-                    </div>
                     <button type="button" onclick="closeOrderModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-light">
+        
+                    <div class="pb-3 pt-3" >
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="discount-checkbox">
+                            <label class="form-check-label" for="discount-checkbox">
+                                Add 20% Discount
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 justify-content-between">
+                        <p >Subtotal: </p>
+                        <p id="total-subtotal" >₱0</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <p >Discount: </p>
+                        <p id="total-discount" >₱0</p>
+                    </div>
+                  
+                    <div class="d-flex gap-2 justify-content-between pt-2">
+                        <h4 class="fw-bold">Total Amount: </h4>
+                        <h4 id="total-order-modal" class="fw-bold" ></h4>
+                    </div>
+                    
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-amount" >Amount</span>
-                        <input id="payment" type="number" class="form-control" placeholder="Payment" aria-label="Input Payment" aria-describedby="basic-amount" >
+                        <input id="payment" type="number" class="form-control" placeholder="Payment" min="0" oninput="validity.valid||(value='');" aria-label="Input Payment" aria-describedby="basic-amount" >
                     </div>
 
                     <div id="change" class="d-flex justify-content-between" >
-                        
                     </div>
                 
                     <button id="pay-btn" onclick="pay()" class="btn btn-primary w-100">Pay</button>
@@ -295,89 +273,82 @@
         </div>
     </div>
 
-    <!-- Inventory Modal -->
-
-    <!-- Add Products -->
-    <div class="modal fade " id="inventory-modal" tabindex="-1" aria-labelledby="inventory-modal-label" aria-hidden="true">
+    <!-- Cashier Alert Modal -->
+    <div class="modal fade"  id="cashier-alert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cashierAlertLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="inventory-modal-label">Add New Product</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-light" id="cashierAlertLabel">
+                        Alert!
+                    </h5>
                 </div>
-                <form id="add-product-form" action="" method="post">
-                    <div class="modal-body">
-                        <div id="message" class="text-danger mb-3"></div>
-                        
-                        <h6 class="mt-2" >Details</h6>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Item Name</span>
-                            <input id="item-name" required type="text" class="form-control text-capitalize" placeholder="Product Name" aria-label="Item Name" aria-describedby="basic-addon1">
-                        </div>
-                        
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon2">Description</span>
-                            <input id="item-description" required type="text" class="form-control text-capitalize" placeholder="Description" aria-label="Description" aria-describedby="basic-addon2">
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="best-seller">
-                            <label class="form-check-label" for="best-seller">
-                              Best Seller
-                            </label>
-                        </div>
-                          
-
-                        <h6 class="mt-4" >Price</h6>
-
-                        <div class="d-flex gap-2 flex-wrap flex-sm-nowrap" >
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon2">Medium</span>
-                                <input id="price-medium" type="number" step="0.01" class="form-control" placeholder="Medium Price" aria-label="Medium Price" aria-describedby="basic-addon2">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon2">Large</span>
-                                <input id="price-large" type="number" step="0.01" class="form-control" placeholder="Large Price" aria-label="Large Price" aria-describedby="basic-addon2">
-                            </div>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon2">Stock</span>
-                            <input id="item-stock" type="number" value="0" class="form-control" placeholder="Available Stocks" aria-label="Available Stocks" aria-describedby="basic-addon2">
-                        </div>
-
-                        <h6 class="mt-4" >Type</h6>
-    
-                        <select id="item-type" class="form-select" >
-                            <option value="milktea">Milktea</option>
-                            <option value="coffee">Coffee</option>
-                            <option value="snack">Snack</option>
-                        </select>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                    </div>
-    
-                </form>
+                <div id="cashier-alert-body" class="modal-body d-flex gap-2 align-items-center p-3">
+                    <i class="bi bi-x-circle-fill text-danger display-6"></i>
+                    <p id="cashier-alert-message" ></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="alert-button" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Edit Products -->
-    <div class="modal fade" id="edit-inventory-modal" tabindex="-1" aria-labelledby="edit-inventory-modal-label" aria-hidden="true">
+    <!-- Receipt -->
+    <div class="modal fade "  id="receipt" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="receiptLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="edit-inventory-modal-label">Edit Product</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header ">
+                    <h5 class="modal-title " id="receiptLabel">
+                        Order Receipt
+                    </h5>
                 </div>
-                <form id="edit-product-form" action="" method="post">
-                   <!-- editProductForm inventory.js -->
-                </form>
+                <div id="receipt-body " class="modal-body ms-3 me-3">
+                    <div class="mt-2 mb-2 ">
+                        <h5 class="text-center fw-bold" >The Brew Authoritea</h5>
+                        <p class="text-center">Kapasigan, Pasig City</p>
+                        <p class="text-center">123-456-789</p>
+                    </div>
+
+                    <div class="border-dotted mt-4 mb-2  " ></div>
+
+                    <table class="table table-borderless" >
+                        <thead>
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col" class="text-end">Qty</th>
+                                <th scope="col" class="text-end">Subtotal</th>
+                            </tr> 
+                        </thead>
+                        <tbody id="receipt-list" >
+                            <!-- order receipt -->
+                        </tbody>
+                    </table>
+
+                    <div class="mt-5 p-3" >
+                        <div class="d-flex justify-content-between flex-wrap mb-2 " >
+                                <p class="fw-light" >Items</p>
+                                <p id="receipt-total-items" class="fw-light" >0</p>
+                        </div>
+
+                        <div class="dropdown-divider" ></div>
+
+                        <div class="d-flex justify-content-between flex-wrap mb-2 " >
+                            <p class="fw-light" >Discount</p>
+                            <p id="receipt-discount" class="fw-light" >0</p>
+                        </div>
+
+                        <div class="dropdown-divider" ></div>
+                    
+                        <div class="d-flex justify-content-between flex-wrap mb-2 " >
+                            <p class="h5 fw-bold" >Total</p>
+                            <p id="receipt-total-cost" class="h5 fw-bold" >₱0.00</p>
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="alert-button" type="button" class="btn btn-primary" onclick="reloadPage()">Done</button>
+                </div>
             </div>
         </div>
     </div>

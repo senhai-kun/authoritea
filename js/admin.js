@@ -1,3 +1,4 @@
+
 let revenueToday = document.getElementById("revenue-today");
 let revenueDateToday = document.getElementById("revenue-date-today");
 
@@ -173,7 +174,7 @@ async function updateAccount(e) {
 
 editAccountForm.addEventListener("submit", updateAccount)
 
-// create/add account
+// create or add account
 var form = document.getElementById("create-acc-form");
 var username = document.getElementById("username");
 var password = document.getElementById("password");
@@ -242,10 +243,112 @@ function removeAccount(username) {
 
 }
 
-
 function reload() {
     window.location.reload();
 }
+
+
+// Sales
+
+let salesList = []
+
+fetch("https://authoritea-server.vercel.app/order/order_list/"+new Date().toLocaleDateString().split("/").join(",") ).then( res => res.json() )
+.then( res => {
+    salesList = res;
+
+    if( res.length === 0 ) {
+        document.getElementById("sales").innerHTML = "<h5 class='p-5 text-center' >No Record For Today</h5>"
+    } else {
+        document.getElementById("sales").innerHTML = res.map( data => `
+        <div class="bg-light p-3 rounded-20" >
+            <div class="mb-2">
+                <p>DateTime:</p>
+                <p>${data.orderDateTime}</p>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-between" >
+                <p>Vendor: </p>
+                <p>${data.username}</p>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-between" >
+                <p>Order Cost: </p>
+                <p>${data.totalCost}</p>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-between" >
+                <p>Discount: </p>
+                <p>${data.discount}</p>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-between" >
+                <p>Total Amount: </p>
+                <p>${data.totalAmount}</p>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+
+            
+            <button class="btn btn-primary w-100 mt-3" onclick="moreDetails('${data.orderDateTime}')" >More Details</button>
+        </div>
+    ` ).join("")
+    }
+
+    
+
+} ) 
+.catch( e => console.log(e) )
+
+var salesModal = new bootstrap.Modal(document.getElementById("sales-receipt"));
+
+function moreDetails(date) {
+
+    let details = salesList.find( i => i.orderDateTime === date);
+
+    document.getElementById("sales-receipt-header").innerHTML = `
+        <h5 class="text-center fw-bold" >The Brew Authoritea</h5>
+        <p class="text-center">DateTime: ${details.orderDateTime}</p>
+        <p class="text-center">Vendor: ${details.username}</p>
+        <div class="d-flex gap-3 justify-content-center" >
+            <p class="text-center">Order Cost: ${details.totalCost}</p>
+            <p class="text-center">Discount: ${details.discount}</p>
+        </div>
+    
+        <p class="text-center">Total Amount: ${details.totalAmount}</p>
+    `
+
+    document.getElementById("sales-ingredients").innerHTML = details.ingredientsUsed.map( i => `
+        <div class="d-flex gap-2 justify-content-between" >
+            <p class="text-capitalize" >${i.name} </p>
+            <p>${i.total} grams</p>
+        </div>
+    ` ).join("")
+
+    document.getElementById("sales-receipt-list").innerHTML = details.orderList.map( data => `
+        <tr>
+            <td scope="col">
+                <div>
+                    <p class="text-capitalize">${data.name} - ${data.variant}</p>
+                    <p>₱${data.itemPrice}</p>
+                </div>
+            </td>
+            <td class="text-end" >${data.qty}</td>
+            <td class="text-end" >${data.subtotal}</td>
+        </tr> 
+    ` ).join("")
+
+    document.getElementById("receipt-total-items").innerText = details.totalItems;
+    document.getElementById("receipt-total-cost").innerText = "₱" + details.totalAmount.toFixed(2);
+
+    salesModal.show();
+}
+
+function closeSales() {
+    salesModal.hide();
+}
+
+
 
 
 
